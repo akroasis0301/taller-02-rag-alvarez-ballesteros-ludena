@@ -1,4 +1,79 @@
-# Lab 02 — RAG con Vector Search y Evaluación
+# Taller 02 — RAG sobre un corpus real · MMIA 6013
+
+Repositorio del grupo para el Taller 02 (IA Generativa y Agentes, USFQ). Parte del
+andamiaje `Lab-02-RAG-VectorSearch` del profesor, reorganizado como proyecto **uv**.
+
+## Integrantes
+
+- Darlyn Ludeña
+- Jessica Ballesteros
+- Miguel Alvarez
+
+## Requisitos
+
+- [uv](https://docs.astral.sh/uv/) (gestiona Python 3.12 y las dependencias)
+- Docker (para Qdrant)
+- VPN GlobalProtect de la USFQ (embeddings `bge-m3` en la H200). Sin VPN: `EMBEDDING_BACKEND=openai`
+
+## Puesta en marcha
+
+```bash
+git clone https://github.com/akroasis0301/taller-02-rag-alvarez-ballesteros-ludena.git
+cd taller-02-rag-alvarez-ballesteros-ludena
+uv sync                     # crea .venv con las versiones exactas de uv.lock
+cp .env.example .env        # cada uno pone su clave aquí; .env NUNCA se sube
+```
+
+> **No uses `pip install -r requirements.txt`** (la instrucción del README original, más abajo).
+> `requirements.txt` existe solo como entregable de reproducibilidad y se regenera desde uv.
+
+## Qdrant
+
+```bash
+docker run -p 6333:6333 -v "$(pwd)/qdrant_storage:/qdrant/storage" qdrant/qdrant
+```
+
+`qdrant_storage/` guarda el índice entre corridas y está en `.gitignore`.
+Para depurar sin Docker: `QDRANT_URL=":memory:"`.
+
+## Cómo se ejecuta
+
+```bash
+# Parte 0 (MiniLM local, sin VPN ni Docker)
+EMBEDDING_BACKEND=local QDRANT_URL=":memory:" CORPUS_DIR=ejemplos uv run python rag_pipeline.py "¿cuántos días de vacaciones puedo transferir?"
+
+# Parte 1 (corpus real en corpus/)
+uv run python rag_pipeline.py "una pregunta de prueba"
+
+# Parte 2.b (un CSV por cada k, para no sobrescribir)
+uv run python evaluation.py --k 3 --csv resultados/resultados_k3.csv
+uv run python evaluation.py --k 5 --csv resultados/resultados_k5.csv
+```
+
+## Estructura
+
+```
+corpus/         Corpus del grupo (Parte 1)
+ejemplos/       Corpus mínimo + PDF escaneado (Parte 0)
+fuentes/        Tabla semestral de modelos (modelos-2026-1.json)
+salidas/parte0/ Salidas crudas de 0.a, 0.b y 0.c
+resultados/     CSV crudos de evaluation.py (entregable)
+notebooks/      Pruebas y análisis
+informe/        Informe final en PDF
+```
+
+## Reglas del equipo
+
+- **Pull antes de empezar** y antes de cada commit.
+- **Un notebook, una persona**: los `.ipynb` no se fusionan bien.
+- **Solo una persona agrega dependencias** (`uv add ...`) y después regenera:
+  `uv export --format requirements-txt --no-hashes --no-dev -o requirements.txt`.
+  Los demás hacen pull y `uv sync`.
+- **Ninguna clave** en código, notebooks, capturas ni commits (política de credenciales del curso).
+
+---
+
+# Andamiaje original del profesor (Lab 02)
 
 Andamiaje del Taller 2. Trae la ingesta, la fragmentación, el índice, la recuperación, el
 prompt, **la llamada al LLM** y el evaluador; lo que el estudiante pone es el corpus, el
