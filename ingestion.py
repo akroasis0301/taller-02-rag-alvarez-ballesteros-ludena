@@ -206,3 +206,20 @@ if __name__ == "__main__":
     chunks = load_corpus(corpus, tokenizer=tokenizer, max_seq_tokens=tope)
     write_chunks_jsonl(chunks, Path("data/chunks.jsonl"))
     print(f"Chunks generados: {len(chunks)}")
+
+
+
+
+### Conclusiones o Frases
+
+#1. El texto fue ingestado mediante la función load_corpus que lee los documentos
+# del corpus y los fragmenta en tokens del modelo, el resultado de la ingesta
+# dió 0 caracteres útiles en dos páginas y que no pudo obtenerse el texto, puesto 
+# que el archivo pudo haber sido escaneado o fotografiado.
+
+# 2. Sin la comprobación que realiza la función load_corpus que permite identificar
+# si el archivo fue o no escaneado, la salida fueran fragmentos correspondientes 
+# a sus páginas, pero sin palabras recuperables y sin que necesariamente se produzca una excepción.
+# La comprobación se la realiza para evitar indexar documentos que no contienen texto útil, o índices
+# con contenido vacío. Ante ello, la extracción de este tipo de información necesita ser aplicado
+# previamente por un proceso OCR.
