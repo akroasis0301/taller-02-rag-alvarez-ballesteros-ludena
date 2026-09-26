@@ -1,0 +1,53 @@
+{
+  "_AVISO": "ARCHIVO DE EJEMPLO - REEMPLAZAR POR LA TABLA OFICIAL DEL CURSO (fuentes/modelos/modelos-2026-1.json). Los precios de este archivo NO estan verificados: sirven solo para practicar el calculo de costos. Cita siempre los precios de la tabla oficial y su fecha de verificacion.",
+  "example_file": true,
+  "verified_at": null,
+  "pricing_unit": "1M tokens",
+  "models": [
+    {
+      "id": "propietario_grande",
+      "provider": "anthropic",
+      "model": "claude-opus-4-8",
+      "input_usd_per_1m": 5.0,
+      "output_usd_per_1m": 25.0,
+      "verified_at": null,
+      "_nota": "EJEMPLO. Valores inferidos de las razones publicadas en glosario-mmia-6013.pdf (33x en entrada y 41,7x en salida frente a gpt-4o-mini). La asignacion del id a este modelo tambien es una inferencia. VERIFICAR."
+    },
+    {
+      "id": "juez_economico",
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5",
+      "input_usd_per_1m": 1.0,
+      "output_usd_per_1m": 5.0,
+      "verified_at": null,
+      "_nota": "EJEMPLO. Inferido de 'opus frente a haiku: 5x en ambos terminos' (glosario-mmia-6013.pdf). La asignacion del id es una inferencia. VERIFICAR."
+    },
+    {
+      "id": "propietario_economico",
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "input_usd_per_1m": 0.15,
+      "output_usd_per_1m": 0.6,
+      "verified_at": null,
+      "_nota": "EJEMPLO. Cifras que sesion-04.pdf cita como verificadas el 2026-08-26 en la tabla oficial; este archivo de ejemplo NO las verifica. VERIFICAR."
+    },
+    {
+      "id": "open_weight_local",
+      "provider": "ollama",
+      "model": "llama3.1:8b",
+      "input_usd_per_1m": 0.0,
+      "output_usd_per_1m": 0.0,
+      "verified_at": null,
+      "_nota": "El cero es real: se ejecuta en local y no hay precio por token."
+    },
+    {
+      "id": "sin_precio_ejemplo",
+      "provider": "ejemplo",
+      "model": null,
+      "input_usd_per_1m": null,
+      "output_usd_per_1m": null,
+      "verified_at": null,
+      "_nota": "Fila ficticia con precio None para probar el error del Ejercicio 1.1 (precio sin verificar)."
+    }
+  ]
+}

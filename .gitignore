@@ -1,0 +1,62 @@
+# =========================================================
+#  Taller 02 — RAG · MMIA 6013
+# =========================================================
+
+# ---------Secrets----------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+credentials*.json
+
+# ---------- Entorno virtual / uv ----------
+.venv/
+venv/
+env/
+.uv-cache/
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+.virtual_documents/
+
+# ---------- Artefactos generados por el pipeline ----------
+# chunks.jsonl lo regenera ingestion.py
+data/
+# volumen del contenedor Qdrant
+qdrant_storage/
+*.jsonl
+
+# ---------- Cachés de modelos (Hugging Face / sentence-transformers) ----------
+.cache/
+hf_cache/
+models_cache/
+
+
+
+# ---------- Comprimidos ----------
+*.zip
+*.tar.gz
+
+# ---------- Sistema operativo / editores ----------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

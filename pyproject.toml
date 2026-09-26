@@ -1,0 +1,28 @@
+[project]
+name = "taller-02-rag-alvarez-ballesteros-ludena"
+version = "0.1.0"
+description = "Taller 02 MMIA 6013 - RAG con Vector Search, golden set y evaluacion"
+readme = "README.md"
+authors = [
+    { name = "akroasis0301", email = "miguel.alvrz.n@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.30",
+    "numpy>=1.26",
+    "openai>=1.0",
+    "pypdf>=4.0",
+    "python-dotenv>=1.0",
+    "qdrant-client>=1.12",
+    "ragas>=0.2",
+    "rank-bm25>=0.2",
+    "sentence-transformers>=3.0",
+    "tiktoken>=0.7",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "matplotlib>=3.11.2",
+    "scikit-learn>=1.9.1",
+]
