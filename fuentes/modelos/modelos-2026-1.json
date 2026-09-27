@@ -48,6 +48,14 @@
       "output_usd_per_1m": null,
       "verified_at": null,
       "_nota": "Fila ficticia con precio None para probar el error del Ejercicio 1.1 (precio sin verificar)."
+    },
+    {
+      "id": "open_weight_pequeno",
+      "provider": "ollama",
+      "model": "qwen3:32b",
+      "input_usd_per_1m": 0.0,
+      "output_usd_per_1m": 0.0,
+      "verified_at": null
     }
   ]
 }
