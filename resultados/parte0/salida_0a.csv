@@ -1,25 +1,3 @@
 ﻿salida_stdout
 "embeddings: local Â· sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 Â· tope 128 tokens Â· Qdrant :memory:
-ingesta: nimbus_gastos.md: 1 pÃ¡gina(s), 294 caracteres Ãºtiles â†’ 1 fragmento(s)
-ingesta: nimbus_remoto.md: 1 pÃ¡gina(s), 296 caracteres Ãºtiles â†’ 1 fragmento(s)
-ingesta: nimbus_vacaciones.md: 1 pÃ¡gina(s), 363 caracteres Ãºtiles â†’ 1 fragmento(s)
-indexados 3 fragmentos de 3 documento(s)
-  0.123  nimbus_vacaciones.md / nimbus_vacaciones-0000  # PolÃ­tica de vacaciones de NimbusSoft Los empleados a tiempo completo acumulan â€¦
-  0.118  nimbus_remoto.md / nimbus_remoto-0000  # PolÃ­tica de trabajo remoto de NimbusSoft El trabajo remoto estÃ¡ permitido hastâ€¦
-  0.078  nimbus_gastos.md / nimbus_gastos-0000  # PolÃ­tica de reembolso de gastos de NimbusSoft Los gastos de viaje se reembolsaâ€¦
-
-[modo inspecciÃ³n (sin clave ni Ollama)] abstuvo=None
-[modo inspecciÃ³n: no hay clave de API ni Ollama; este es el prompt]
-Responde usando solo el contexto recuperado.
-Si el contexto no contiene la respuesta, di exactamente: ""El corpus no contiene informaciÃ³n suficiente.""
-
-Contexto:
-[1] nimbus_vacaciones.md / nimbus_vacaciones-0000
-# PolÃ­tica de vacaciones de NimbusSoft Los empleados a tiempo completo acumulan 1.5 dÃ­as de vacaciones por mes trabajado, hasta un mÃ¡ximo de 18 dÃ­as por aÃ±o. Las vacaciones deben solicitarse con al menos 15 dÃ­as de anticipaciÃ³n a travÃ©s del portal interno. Los dÃ­as no utilizados pueden transferirse al aÃ±o siguiente hasta un mÃ¡ximo de 5 dÃ­as. Durante el primer aÃ±o, los dÃ­as solo pueden tomarse despuÃ©s de superar el perÃ­odo de prueba de 3 meses.
-
-[2] nimbus_remoto.md / nimbus_remoto-0000
-# PolÃ­tica de trabajo remoto de NimbusSoft El trabajo remoto estÃ¡ permitido hasta 3 dÃ­as por semana para todos los roles excepto soporte de infraestructura on-site. Los dÃ­as remotos se coordinan con el lÃ­der de equipo. Para trabajar desde el exterior del paÃ­s se requiere aprobaciÃ³n de Recursos Humanos con 30 dÃ­as de anticipaciÃ³n y un mÃ¡ximo de 60 dÃ­as por aÃ±o.
-
-[3] nimbus_gastos.md / nimbus_gastos-0000
-# PolÃ­tica de reembolso 
 "
