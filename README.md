@@ -45,9 +45,21 @@ EMBEDDING_BACKEND=local QDRANT_URL=":memory:" CORPUS_DIR=ejemplos uv run python 
 # Parte 1 (corpus real en corpus/)
 uv run python rag_pipeline.py "una pregunta de prueba"
 
-# Parte 2.b (un CSV por cada k, para no sobrescribir)
-uv run python evaluation.py --k 3 --csv resultados/resultados_k3.csv
-uv run python evaluation.py --k 5 --csv resultados/resultados_k5.csv
+# Parte 2 (10 preguntas definidas en golden_set.json)
+# También se puede ejecutar paso a paso en notebooks/2. Parte2.ipynb.
+# Con VPN GlobalProtect: EMBEDDING_BACKEND=h200 (valor por defecto), Qdrant levantado,
+# .env configurado para generación con propietario_economico u Ollama. Sin clave,
+# puedes usar el Ollama de la H200: export OLLAMA_URL=http://172.28.230.10:11434
+# El notebook guarda los dos CSV por k y resultados/resultados.csv combinado (20 filas).
+uv run python evaluation.py --golden golden_set.json --k 3 --csv resultados/parte2_k3.csv
+uv run python evaluation.py --golden golden_set.json --k 5 --csv resultados/parte2_k5.csv
+
+# Sin VPN: usa embeddings de OpenAI (requiere OPENAI_API_KEY en .env) y reindexa.
+EMBEDDING_BACKEND=openai uv run python evaluation.py --golden golden_set.json --k 3 --csv resultados/parte2_k3.csv
+EMBEDDING_BACKEND=openai uv run python evaluation.py --golden golden_set.json --k 5 --csv resultados/parte2_k5.csv
+
+# Recuperación únicamente (sin generar ni medir las tasas de abstención):
+uv run python evaluation.py --golden golden_set.json --k 3 --sin-generar --csv resultados/parte2_k3_sin_generar.csv
 ```
 
 ## Estructura
@@ -116,7 +128,7 @@ Lab-02-RAG-VectorSearch/
 ## Baseline
 
 1. Copia tus PDFs o `.txt`/`.md` en `corpus/`.
-2. Completa `golden_set_plantilla.json` y guárdalo como `golden_set.json`.
+2. Revisa/ajusta `golden_set.json` para que sus fuentes correspondan exactamente a los documentos de `corpus/`.
 3. `python rag_pipeline.py "una pregunta de prueba"`: ingesta, indexa, recupera y genera.
 4. `python evaluation.py --k 5`: métricas y `resultados.csv`, una fila por consulta.
 
