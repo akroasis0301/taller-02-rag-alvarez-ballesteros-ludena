@@ -1,0 +1,2 @@
+﻿id,proveedor,modelo,dimension,tokens_secuencia,multilingue,costo_usd_1M,verified_at
+embed_local_multilingue,BAAI,BAAI/bge-m3,1024,8192,True,0,2026-08-27
