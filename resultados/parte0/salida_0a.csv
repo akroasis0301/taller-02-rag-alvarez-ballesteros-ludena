@@ -1,3 +1,10 @@
 ﻿salida_stdout
 "embeddings: local Â· sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 Â· tope 128 tokens Â· Qdrant :memory:
 "
+salida_stderr
+"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 199/199 [00:00<00:00, 2494.15it/s]
+ningÃºn fragmento indexable en ejemplos/ (Â¿PDFs escaneados? Â¿carpeta vacÃ­a?)
+"
