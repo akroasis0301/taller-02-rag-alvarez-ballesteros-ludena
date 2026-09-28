@@ -62,12 +62,20 @@ EMBEDDING_BACKEND=openai uv run python evaluation.py --golden golden_set.json --
 uv run python evaluation.py --golden golden_set.json --k 3 --sin-generar --csv resultados/parte2_k3_sin_generar.csv
 ```
 
+## Orden de ejecución de los notebooks
+
+Con GlobalProtect conectada y Qdrant levantado (`docker start qdrant-taller02`), ejecutar **Run All** en orden:
+`notebooks/0. Parte0.ipynb` → `1. Parte1.ipynb` → `2. Parte2.ipynb` → `3. Parte3.ipynb`.
+Todos usan el mismo generador (`open_weight_pequeno`, qwen3:32b en el Ollama de la H200) y vacían
+las claves de API en el propio notebook, así que no dependen de lo que haya en `.env`.
+
 ## Estructura
 
 ```
 corpus/         Corpus del grupo (Parte 1)
 ejemplos/       Corpus mínimo + PDF escaneado (Parte 0)
 fuentes/        Tabla semestral de modelos (modelos-2026-1.json)
+hibrido.py      Parte 3: búsqueda híbrida BM25 + densa con RRF
 salidas/parte0/ Salidas crudas de 0.a, 0.b y 0.c
 resultados/     CSV crudos de evaluation.py (entregable)
 notebooks/      Pruebas y análisis

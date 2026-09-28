@@ -1,0 +1,9 @@
+﻿id,tipo,pos_baseline,pos_hibrido,rank_denso_del_acierto,rank_bm25_del_acierto,top3_bm25
+1,simple,1.0,1.0,1.0,12.0,brown-2020-gpt3-0123 ouyang-2022-instructgpt-0106 ouyang-2022-instructgpt-0031
+2,simple,,,,,brown-2020-gpt3-0123 brown-2020-gpt3-0122 ouyang-2022-instructgpt-0106
+3,simple,,,,,ouyang-2022-instructgpt-0106 brown-2020-gpt3-0123 ouyang-2022-instructgpt-0031
+4,simple,,,,,brown-2020-gpt3-0123 ouyang-2022-instructgpt-0106 ouyang-2022-instructgpt-0030
+5,simple,3.0,2.0,3.0,8.0,brown-2020-gpt3-0123 ouyang-2022-instructgpt-0106 brown-2020-gpt3-0122
+6,multi-chunk,1.0,1.0,1.0,,brown-2020-gpt3-0123 ouyang-2022-instructgpt-0106 ouyang-2022-instructgpt-0031
+7,multi-chunk,1.0,1.0,1.0,,ouyang-2022-instructgpt-0106 ouyang-2022-instructgpt-0031 ouyang-2022-instructgpt-0030
+10,adversarial,1.0,1.0,1.0,6.0,brown-2020-gpt3-0123 ouyang-2022-instructgpt-0030 ouyang-2022-instructgpt-0106

@@ -208,18 +208,13 @@ if __name__ == "__main__":
     print(f"Chunks generados: {len(chunks)}")
 
 
-
-
-### Conclusiones o Frases
-
-#1. El texto fue ingestado mediante la función load_corpus que lee los documentos
-# del corpus y los fragmenta en tokens del modelo, el resultado de la ingesta
-# dió 0 caracteres útiles en dos páginas y que no pudo obtenerse el texto, puesto 
-# que el archivo pudo haber sido escaneado o fotografiado.
-
-# 2. Sin la comprobación que realiza la función load_corpus que permite identificar
-# si el archivo fue o no escaneado, la salida fueran fragmentos correspondientes 
-# a sus páginas, pero sin palabras recuperables y sin que necesariamente se produzca una excepción.
-# La comprobación se la realiza para evitar indexar documentos que no contienen texto útil, o índices
-# con contenido vacío. Ante ello, la extracción de este tipo de información necesita ser aplicado
-# previamente por un proceso OCR.
+# ── Parte 0.a — las dos frases ──────────────────────────────────────────────────────
+# 1. load_corpus cuenta, para cada documento, los caracteres útiles (letras y dígitos, sin
+#    las marcas [page=N] que añade la propia ingesta) y, si no llegan a
+#    MIN_CARACTERES_UTILES (200), lo anuncia en pantalla y no lo indexa;
+#    instructivo_escaneado.pdf tiene 0 caracteres útiles en 2 páginas porque es una imagen
+#    sin capa de texto.
+# 2. Sin esa comprobación, pypdf devolvería texto vacío en cada página y la ingesta
+#    produciría un único fragmento hecho solo de "[page=1] [page=2]", que se vectorizaría e
+#    indexaría sin ninguna excepción: el índice diría que el documento está, pero ninguna
+#    de sus palabras sería recuperable.

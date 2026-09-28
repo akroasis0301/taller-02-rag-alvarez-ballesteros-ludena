@@ -1,0 +1,11 @@
+id,tipo,respondible,modelo_embeddings,k,posicion,hit,reciprocal_rank,score_top1,abstuvo,generador,retrieved_ids
+1,simple,True,BAAI/bge-m3+bm25-rrf,3,1,True,1.0,0.03028233151183971,False,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 brown-2020-gpt3-0153 brown-2020-gpt3-0123
+2,simple,True,BAAI/bge-m3+bm25-rrf,3,,False,0.0,0.027972027972027972,True,ollama:qwen3:32b,rafailov-2023-dpo-0036 ouyang-2022-instructgpt-0036 brown-2020-gpt3-0123
+3,simple,True,BAAI/bge-m3+bm25-rrf,3,,False,0.0,0.01639344262295082,False,ollama:qwen3:32b,wei-2022-chain-of-thought-0021 ouyang-2022-instructgpt-0106 wei-2022-chain-of-thought-0052
+4,simple,True,BAAI/bge-m3+bm25-rrf,3,,False,0.0,0.030330882352941176,False,ollama:qwen3:32b,bai-2022-constitutional-ai-0041 bai-2022-constitutional-ai-0040 wei-2022-chain-of-thought-0052
+5,simple,True,BAAI/bge-m3+bm25-rrf,3,2,True,0.5,0.031054405392392875,False,ollama:qwen3:32b,bai-2022-constitutional-ai-0002 bai-2022-constitutional-ai-0000 bai-2022-constitutional-ai-0007
+6,multi-chunk,True,BAAI/bge-m3+bm25-rrf,3,1,True,1.0,0.01639344262295082,False,ollama:qwen3:32b,brown-2020-gpt3-0071 brown-2020-gpt3-0123 ouyang-2022-instructgpt-0024
+7,multi-chunk,True,BAAI/bge-m3+bm25-rrf,3,1,True,1.0,0.01639344262295082,False,ollama:qwen3:32b,rafailov-2023-dpo-0025 ouyang-2022-instructgpt-0106 ouyang-2022-instructgpt-0006
+8,negativo,False,BAAI/bge-m3+bm25-rrf,3,,,,0.03125763125763126,True,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0017 vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0013
+9,negativo,False,BAAI/bge-m3+bm25-rrf,3,,,,0.03131881575727918,True,ollama:qwen3:32b,brown-2020-gpt3-0096 ouyang-2022-instructgpt-0003 brown-2020-gpt3-0123
+10,adversarial,True,BAAI/bge-m3+bm25-rrf,3,1,True,1.0,0.031544957774465976,False,ollama:qwen3:32b,rafailov-2023-dpo-0000 rafailov-2023-dpo-0011 rafailov-2023-dpo-0012
