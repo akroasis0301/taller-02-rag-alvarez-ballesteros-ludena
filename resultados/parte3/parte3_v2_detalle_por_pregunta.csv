@@ -1,0 +1,9 @@
+﻿id,tipo,pos_baseline (denso),pos_híbrido v1,pos_híbrido v2 (sin stopwords)
+1,simple,1.0,1.0,1.0
+2,simple,,,1.0
+3,simple,,,
+4,simple,,,
+5,simple,3.0,2.0,2.0
+6,multi-chunk,1.0,1.0,1.0
+7,multi-chunk,1.0,1.0,1.0
+10,adversarial,1.0,1.0,1.0

@@ -1,0 +1,7 @@
+﻿sistema,k,hit_rate,mrr,abstencion_correcta,abstencion_indebida,csv
+baseline (denso),3,0.625,0.5416666666666666,1.0,0.125,resultados/parte2_k3.csv
+híbrido v1,3,0.625,0.5625,1.0,0.125,resultados/parte3/parte3_hibrido_k3.csv
+híbrido v2 (sin stopwords),3,0.75,0.6875,1.0,0.25,resultados/parte3/parte3_hibrido_v2_k3.csv
+baseline (denso),5,0.625,0.5416666666666666,1.0,0.25,resultados/parte2_k5.csv
+híbrido v1,5,0.625,0.5625,1.0,0.25,resultados/parte3/parte3_hibrido_k5.csv
+híbrido v2 (sin stopwords),5,0.75,0.6875,1.0,0.25,resultados/parte3/parte3_hibrido_v2_k5.csv

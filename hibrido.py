@@ -16,6 +16,12 @@ Cómo funciona:
    comparables, y RRF no necesita normalizarlos. RRF_K = 60 es el valor de Cormack et al.
    (2009) y el que se usó en el notebook del jueves.
 
+**Versión 2 (iteración declarada en la Parte 3):** `stopwords=STOPWORDS_ES` quita de la
+PREGUNTA las palabras vacías del español. En la v1 esas palabras ("que", "de", "la", "se")
+casi no aparecen en un corpus en inglés, BM25 les daba un IDF alto y dominaban el
+puntaje, llevando arriba fragmentos con texto en francés o español (apéndices de
+traducción). Los fragmentos no se tocan: el índice BM25 es el mismo en v1 y v2.
+
 `PipelineHibrido` hereda de `RagPipeline`: solo cambia `retrieve`, así que `answer`,
 `build_prompt`, `generate` y `evaluation.evaluate_retrieval` funcionan sin modificarse,
 y la comparación contra el baseline es con el mismo índice, prompt y generador.
@@ -33,6 +39,13 @@ from rag_pipeline import COLLECTION, RagPipeline
 RRF_K = 60
 CANDIDATOS = 20
 
+# Palabras vacías del español (y "et", de "et al."). Solo se quitan de la pregunta (v2).
+STOPWORDS_ES = frozenset("""
+a al algo como con cual cuales cuando de del el ella ellos en entre es esa ese eso esta
+este esto et etc fue ha hay la las le les lo los mas me mi muy no nos o otra otro para
+pero por que quien se segun ser si sin sobre su sus tambien te tu un una uno unos y ya
+""".split())
+
 
 def tokenizar(texto: str) -> list[str]:
     """Minúsculas, sin tildes, solo secuencias alfanuméricas. Es deliberadamente simple
@@ -44,12 +57,23 @@ def tokenizar(texto: str) -> list[str]:
 
 class PipelineHibrido(RagPipeline):
     def __init__(self, collection: str = COLLECTION, candidatos: int = CANDIDATOS,
-                 rrf_k: int = RRF_K):
+                 rrf_k: int = RRF_K, stopwords: frozenset | None = None):
         super().__init__(collection)
         self.candidatos = candidatos
         self.rrf_k = rrf_k
+        self.stopwords = stopwords or frozenset()   # vacío = v1
         self._chunks = []
         self._bm25 = None
+
+    def compartir_indice(self, otro: "PipelineHibrido") -> None:
+        """Usa la colección de Qdrant y el índice BM25 de `otro`, sin volver a vectorizar.
+        Así v1 y v2 se comparan sobre exactamente el mismo índice."""
+        self.collection = otro.collection
+        self._chunks = otro._chunks
+        self._bm25 = otro._bm25
+
+    def terminos_consulta(self, question: str) -> list[str]:
+        return [t for t in tokenizar(question) if t not in self.stopwords]
 
     def index(self, chunks) -> None:
         """Indexa en Qdrant (denso) y construye el índice BM25 sobre los mismos fragmentos."""
@@ -63,7 +87,7 @@ class PipelineHibrido(RagPipeline):
     def retrieve_bm25(self, question: str, top_k: int = 5) -> list[dict]:
         if self._bm25 is None:
             raise RuntimeError("Llama a index() antes de recuperar: el índice BM25 vive en memoria")
-        puntajes = self._bm25.get_scores(tokenizar(question))
+        puntajes = self._bm25.get_scores(self.terminos_consulta(question))
         orden = np.argsort(-puntajes)[:top_k]
         # Un fragmento con BM25 = 0 no comparte ningún término con la pregunta: no es un
         # candidato léxico. Si entrara, RRF le daría crédito por una posición arbitraria
