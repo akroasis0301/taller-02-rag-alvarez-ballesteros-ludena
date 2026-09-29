@@ -77,6 +77,7 @@ degr = leer("resultados/parte1/numeral1_degradacion.csv")
 top5 = leer("resultados/parte1/numeral4_retrieval_top5.csv")
 gen1 = leer("resultados/parte1/numeral5_generacion.csv")
 det3 = leer("resultados/parte3/parte3_detalle_por_pregunta.csv")
+detv2 = {r["id"]: r for r in leer("resultados/parte3/parte3_v2_detalle_por_pregunta.csv")} if V2 else {}
 
 S = []
 # ── Portada ──
@@ -195,6 +196,16 @@ for c in peores:
     et, ev = diag.get(c["id"], ("", ""))
     filas.append([f"{c['id']} ({c['tipo']})", hits, str(c["posicion_fragmento_esperado_top50"]), et, ev])
 S += [tabla(filas, [1.5, 3.8, 2.1, 2.9, 6.7])]
+ing = {"rafailov": "rafailov-2023-dpo.pdf: 27 página(s), 71700 caracteres útiles → 66 fragmento(s)",
+       "wei": "wei-2022-chain-of-thought.pdf: 43 página(s), 105503 caracteres útiles → 90 fragmento(s)",
+       "ouyang": "ouyang-2022-instructgpt.pdf: 68 página(s), 143167 caracteres útiles → 118 fragmento(s)"}
+filas = [["Caso", "Ingesta del documento fuente", "Respuesta generada (k=5, extracto)"]]
+for c in peores:
+    doc = c["documentos_fuente"][0].split("-")[0]
+    r = (c.get("respuesta_generada") or "").replace("**", "").replace("\n", " ")
+    filas.append([str(c["id"]), ing.get(doc, ""), (r[:230] + "…") if len(r) > 230 else r])
+S += [Spacer(1, 4), tabla(filas, [1.2, 6.2, 9.6]),
+      P("La ingesta de los tres documentos fuente es completa (sin avisos): ninguno de los tres fallos viene de un documento sin texto.", "cap")]
 S += [Spacer(1, 6), P("<b>Las fallas silenciosas de la Parte 0 en nuestro corpus.</b> PDF sin texto: no está (ningún documento rechazado). Fragmento truncado: no está "
       "(512 ≪ 8192, y la H200 rechaza en vez de truncar). Índice que no se queja: <b>sí está</b>: el mejor vecino de las negativas puntúa 0,567 y 0,577, dentro del rango de las "
       "respondibles (0,554–0,699), y el caso 2 trae cinco vecinos «sanos» del documento equivocado. Lo detecta la abstención, no el Hit Rate. "
@@ -217,11 +228,12 @@ for k in ("3", "5"):
         m = a if k == "3" else b
         filas.append([n, k, f3(m["hit"]), f3(m["mrr"]), f3(m["ac"]), f3(m["ai"])])
 S += [P("Resultados (derivados de los CSV crudos)", "h2"), tabla(filas, [5.4, 0.9, 2.4, 2.4, 2.9, 3.0]), Spacer(1, 6)]
-filas = [["id", "Tipo", "Posición baseline", "Posición híbrido v1", "Rank denso del acierto", "Rank BM25 del acierto"]]
+filas = [["id", "Tipo", "Pos. baseline", "Pos. híbrido v1", "Pos. híbrido v2", "Rank denso (v1)", "Rank BM25 (v1)"]]
 for r in det3:
     fx = lambda v: str(int(float(v))) if v else "—"
-    filas.append([r["id"], r["tipo"], fx(r["pos_baseline"]), fx(r["pos_hibrido"]), fx(r["rank_denso_del_acierto"]), fx(r["rank_bm25_del_acierto"])])
-S += [tabla(filas, [1, 2.4, 3.1, 3.3, 3.6, 3.6]), P("Tabla. Detalle por pregunta respondible, k=5. «—» en las posiciones: sin acierto en el top-5; en los ranks: el fragmento del acierto no está entre los 20 candidatos de esa lista.", "cap")]
+    v2p = fx(detv2[r["id"]]["pos_híbrido v2 (sin stopwords)"]) if V2 else "pend."
+    filas.append([r["id"], r["tipo"], fx(r["pos_baseline"]), fx(r["pos_hibrido"]), v2p, fx(r["rank_denso_del_acierto"]), fx(r["rank_bm25_del_acierto"])])
+S += [tabla(filas, [0.9, 2.3, 2.3, 2.5, 2.5, 3.2, 3.3]), P("Tabla. Detalle por pregunta respondible, k=5. «—» en las posiciones: sin acierto en el top-5; en los ranks: el fragmento del acierto no está entre los 20 candidatos de esa lista.", "cap")]
 S += [P("Interpretación (v1)", "h2"), P(
     f"El Hit Rate no cambia ({f3(h5['hit'])}); el MRR sube de {f3(b5['mrr'])} a {f3(h5['mrr'])} por una sola pregunta: el caso 5 pasa de la posición 3 a la 2 "
     "(su fragmento esperado era 3.º en la lista densa y 8.º en BM25). La abstención no cambia. <b>La predicción falló para los casos 2 y 4</b> y se cumplió para el 3. "
@@ -229,7 +241,22 @@ S += [P("Interpretación (v1)", "h2"), P(
     "(traducción) y de InstructGPT (ejemplos multilingües). Las palabras vacías de nuestras preguntas («que», «de», «la», «se») casi no aparecen en un corpus en inglés, "
     "reciben un IDF alto y pesan más que el nombre del autor. Es el riesgo declarado, por un mecanismo que no previmos: BM25 no deja de encontrar, encuentra con fuerza lo equivocado.")]
 if V2:
-    S += [P("Iteración declarada: v2 sin palabras vacías del español en la consulta", "h2"), P("__V2_TEXTO__")]
+    S += [P("Iteración declarada: v2 sin palabras vacías del español en la consulta", "h2"),
+          P("<b>Cambio único:</b> se quitan de la <i>pregunta</i> las palabras vacías del español (y «et», de «et al.») antes de BM25. Índice BM25, fragmentos, lista densa, "
+            "RRF, prompt y generador son los mismos; la v2 reutiliza el índice de la v1. <b>Predicción escrita antes de medir:</b> corrige el caso 2 («rafailov» solo aparece "
+            "en el resumen de DPO, que ya estaba 9.º en la lista densa); probablemente no el 4 («ouyang» aparece en las referencias de muchos fragmentos); no el 3."),
+          P("Interpretación (v2)", "h2"),
+          P(f"La v2 sube el Hit Rate a <b>{f3(v5['hit'])}</b> y el MRR a <b>{f3(v5['mrr'])}</b>, igual con k=3 y k=5. Las tres predicciones se cumplen: el caso 2 pasa a la "
+            "posición 1 (en la v1 su fragmento estaba 35.º en BM25; ahora «rafailov» domina la consulta y RRF lo combina con su 9.º puesto denso), y los casos 3 y 4 siguen sin "
+            "acierto. Ninguna pregunta que acertaba empeoró su posición."),
+          P(f"<b>La abstención no mejora: indebida {f3(v3['ai'])} (k=3) y {f3(v5['ai'])} (k=5), frente a {f3(b3['ai'])} y {f3(b5['ai'])} del baseline.</b> Cambió quién se "
+            "abstiene. El caso 2 ya no se abstiene: recibe el resumen de DPO y responde. El caso 6 (multi-fragmento GPT-3 + InstructGPT) ahora sí: la v2 sacó del contexto el "
+            "único fragmento de GPT-3 que traía el baseline (brown-2020-gpt3-0071) y dejó solo InstructGPT, y sin esa mitad el modelo se abstuvo. El Hit Rate lo cuenta como "
+            "acierto porque hay un fragmento de una de sus fuentes: es la limitación declarada en la Parte 2, ahora medida. La adversarial (id 10) también se abstiene con k=3."),
+          P(f"<b>Conclusión.</b> La extensión mejora la recuperación medida (+{f3(v5['hit'] - b5['hit'])} de Hit Rate, +{f3(v5['mrr'] - b5['mrr'])} de MRR), pero no la respuesta "
+            "final: la ganancia del caso 2 se paga con el caso 6. Con 8 respondibles cada pregunta mueve el Hit Rate 0,125, así que la diferencia es un caso y no es estadísticamente "
+            "concluyente; además depende de que nuestras preguntas nombran autores. Lo que sí queda probado es el mecanismo: en un corpus en inglés consultado en español, BM25 "
+            "necesita quitar las palabras vacías del idioma de la consulta; sin eso, la búsqueda léxica trae con fuerza lo equivocado.")]
 else:
     S += [P("Iteración declarada: v2 sin palabras vacías del español en la consulta", "h2"),
           P("PENDIENTE: ejecutar la sección 3.3 del notebook de la Parte 3 y regenerar este informe con sus cifras.", "pend")]
@@ -246,6 +273,17 @@ if nb4:
         for par in cuerpo.split("\n\n"):
             par = escape(par); par = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", par)
             S.append(P(par))
+
+S += [P("Anexo — Reproducibilidad", "h1"), P(
+    "El repositorio contiene el código (<font face='DVM'>ingestion.py</font>, <font face='DVM'>rag_pipeline.py</font>, <font face='DVM'>evaluation.py</font>, "
+    "<font face='DVM'>hibrido.py</font>), los cinco notebooks (Partes 0–4), <font face='DVM'>golden_set.json</font>, <font face='DVM'>pyproject.toml</font>, "
+    "<font face='DVM'>uv.lock</font> y <font face='DVM'>requirements.txt</font> con versiones fijadas (p. ej. qdrant-client 1.19.1, sentence-transformers 6.1.0, "
+    "rank-bm25 0.2.2, pypdf 6.19.0). Todas las tablas de este informe se derivan de los CSV crudos de <font face='DVM'>resultados/</font> (una fila por consulta, "
+    "con id, tipo, modelo de embeddings, k, posición del primer acierto, acierto, recíproco, puntaje del mejor vecino, abstención y generador); el propio informe se "
+    "genera con <font face='DVM'>informe/generar_informe.py</font> leyendo esos archivos.")]
+S.append(pre("uv sync\ncp .env.example .env          # claves vacías: todo corre sin clave, en la H200\n"
+             "docker start qdrant-taller02    # o: docker run -d --name qdrant-taller02 -p 6333:6333 qdrant/qdrant\n"
+             "# GlobalProtect conectada; luego Run All en notebooks/ 0 → 1 → 2 → 3 → 4"))
 
 def pie(canvas, doc):
     canvas.saveState(); canvas.setFont("DV", 7.5); canvas.setFillColor(GRIS)

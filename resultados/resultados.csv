@@ -1,21 +1,21 @@
 id,tipo,respondible,modelo_embeddings,k,posicion,hit,reciprocal_rank,score_top1,abstuvo,generador,retrieved_ids
-1,simple,True,BAAI/bge-m3,3,1,True,1.0,0.5587753488249256,False,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0002 vaswani-2017-attention-is-all-you-need-0017
-2,simple,True,BAAI/bge-m3,3,,False,0.0,0.5538365451466293,True,ollama:qwen3:32b,ouyang-2022-instructgpt-0036 ouyang-2022-instructgpt-0037 ouyang-2022-instructgpt-0020
-3,simple,True,BAAI/bge-m3,3,,False,0.0,0.6630597677939571,False,ollama:qwen3:32b,wei-2022-chain-of-thought-0021 wei-2022-chain-of-thought-0052 wei-2022-chain-of-thought-0003
-4,simple,True,BAAI/bge-m3,3,,False,0.0,0.62275234454754,False,ollama:qwen3:32b,ouyang-2022-instructgpt-0039 ouyang-2022-instructgpt-0008 ouyang-2022-instructgpt-0002
-5,simple,True,BAAI/bge-m3,3,3,True,0.3333333333333333,0.6985539016711164,False,ollama:qwen3:32b,bai-2022-constitutional-ai-0008 bai-2022-constitutional-ai-0002 bai-2022-constitutional-ai-0000
-6,multi-chunk,True,BAAI/bge-m3,3,1,True,1.0,0.6129532672956419,False,ollama:qwen3:32b,brown-2020-gpt3-0071 ouyang-2022-instructgpt-0024 ouyang-2022-instructgpt-0004
-7,multi-chunk,True,BAAI/bge-m3,3,1,True,1.0,0.6821916625920919,False,ollama:qwen3:32b,rafailov-2023-dpo-0025 ouyang-2022-instructgpt-0006 rafailov-2023-dpo-0003
-8,negativo,False,BAAI/bge-m3,3,,,,0.5669107119716719,True,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0014 vaswani-2017-attention-is-all-you-need-0012
-9,negativo,False,BAAI/bge-m3,3,,,,0.5767121037207724,True,ollama:qwen3:32b,brown-2020-gpt3-0096 ouyang-2022-instructgpt-0003 brown-2020-gpt3-0001
-10,adversarial,True,BAAI/bge-m3,3,1,True,1.0,0.654106898377658,False,ollama:qwen3:32b,rafailov-2023-dpo-0000 rafailov-2023-dpo-0003 rafailov-2023-dpo-0012
-1,simple,True,BAAI/bge-m3,5,1,True,1.0,0.5587753488249256,False,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0002 vaswani-2017-attention-is-all-you-need-0017 vaswani-2017-attention-is-all-you-need-0018 vaswani-2017-attention-is-all-you-need-0001
-2,simple,True,BAAI/bge-m3,5,,False,0.0,0.5538365451466293,True,ollama:qwen3:32b,ouyang-2022-instructgpt-0036 ouyang-2022-instructgpt-0037 ouyang-2022-instructgpt-0020 ouyang-2022-instructgpt-0002 ouyang-2022-instructgpt-0038
-3,simple,True,BAAI/bge-m3,5,,False,0.0,0.6630597677939571,False,ollama:qwen3:32b,wei-2022-chain-of-thought-0021 wei-2022-chain-of-thought-0052 wei-2022-chain-of-thought-0003 wei-2022-chain-of-thought-0055 wei-2022-chain-of-thought-0002
-4,simple,True,BAAI/bge-m3,5,,False,0.0,0.62275234454754,False,ollama:qwen3:32b,ouyang-2022-instructgpt-0039 ouyang-2022-instructgpt-0008 ouyang-2022-instructgpt-0002 bai-2022-constitutional-ai-0041 ouyang-2022-instructgpt-0038
-5,simple,True,BAAI/bge-m3,5,3,True,0.3333333333333333,0.6985539016711164,False,ollama:qwen3:32b,bai-2022-constitutional-ai-0008 bai-2022-constitutional-ai-0002 bai-2022-constitutional-ai-0000 bai-2022-constitutional-ai-0001 bai-2022-constitutional-ai-0007
-6,multi-chunk,True,BAAI/bge-m3,5,1,True,1.0,0.6129532672956419,False,ollama:qwen3:32b,brown-2020-gpt3-0071 ouyang-2022-instructgpt-0024 ouyang-2022-instructgpt-0004 ouyang-2022-instructgpt-0006 ouyang-2022-instructgpt-0005
-7,multi-chunk,True,BAAI/bge-m3,5,1,True,1.0,0.6821916625920919,False,ollama:qwen3:32b,rafailov-2023-dpo-0025 ouyang-2022-instructgpt-0006 rafailov-2023-dpo-0003 ouyang-2022-instructgpt-0003 rafailov-2023-dpo-0026
-8,negativo,False,BAAI/bge-m3,5,,,,0.5669107119716719,True,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0014 vaswani-2017-attention-is-all-you-need-0012 vaswani-2017-attention-is-all-you-need-0013 vaswani-2017-attention-is-all-you-need-0017
-9,negativo,False,BAAI/bge-m3,5,,,,0.5767121037207724,True,ollama:qwen3:32b,brown-2020-gpt3-0096 ouyang-2022-instructgpt-0003 brown-2020-gpt3-0001 ouyang-2022-instructgpt-0013 ouyang-2022-instructgpt-0046
-10,adversarial,True,BAAI/bge-m3,5,1,True,1.0,0.654106898377658,True,ollama:qwen3:32b,rafailov-2023-dpo-0000 rafailov-2023-dpo-0003 rafailov-2023-dpo-0012 rafailov-2023-dpo-0002 rafailov-2023-dpo-0020
+1,simple,True,BAAI/bge-m3,3,1,True,1.0,0.5587754,False,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0002 vaswani-2017-attention-is-all-you-need-0017
+2,simple,True,BAAI/bge-m3,3,,False,0.0,0.5538365,True,ollama:qwen3:32b,ouyang-2022-instructgpt-0036 ouyang-2022-instructgpt-0037 ouyang-2022-instructgpt-0020
+3,simple,True,BAAI/bge-m3,3,,False,0.0,0.66305983,False,ollama:qwen3:32b,wei-2022-chain-of-thought-0021 wei-2022-chain-of-thought-0052 wei-2022-chain-of-thought-0003
+4,simple,True,BAAI/bge-m3,3,,False,0.0,0.62275237,False,ollama:qwen3:32b,ouyang-2022-instructgpt-0039 ouyang-2022-instructgpt-0008 ouyang-2022-instructgpt-0002
+5,simple,True,BAAI/bge-m3,3,3,True,0.3333333333333333,0.6985539,False,ollama:qwen3:32b,bai-2022-constitutional-ai-0008 bai-2022-constitutional-ai-0002 bai-2022-constitutional-ai-0000
+6,multi-chunk,True,BAAI/bge-m3,3,1,True,1.0,0.6129533,False,ollama:qwen3:32b,brown-2020-gpt3-0071 ouyang-2022-instructgpt-0024 ouyang-2022-instructgpt-0004
+7,multi-chunk,True,BAAI/bge-m3,3,1,True,1.0,0.6821917,False,ollama:qwen3:32b,rafailov-2023-dpo-0025 ouyang-2022-instructgpt-0006 rafailov-2023-dpo-0003
+8,negativo,False,BAAI/bge-m3,3,,,,0.5669106,True,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0014 vaswani-2017-attention-is-all-you-need-0012
+9,negativo,False,BAAI/bge-m3,3,,,,0.5767121,True,ollama:qwen3:32b,brown-2020-gpt3-0096 ouyang-2022-instructgpt-0003 brown-2020-gpt3-0001
+10,adversarial,True,BAAI/bge-m3,3,1,True,1.0,0.65410686,False,ollama:qwen3:32b,rafailov-2023-dpo-0000 rafailov-2023-dpo-0003 rafailov-2023-dpo-0012
+1,simple,True,BAAI/bge-m3,5,1,True,1.0,0.5587754,False,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0002 vaswani-2017-attention-is-all-you-need-0017 vaswani-2017-attention-is-all-you-need-0018 vaswani-2017-attention-is-all-you-need-0001
+2,simple,True,BAAI/bge-m3,5,,False,0.0,0.5538365,True,ollama:qwen3:32b,ouyang-2022-instructgpt-0036 ouyang-2022-instructgpt-0037 ouyang-2022-instructgpt-0020 ouyang-2022-instructgpt-0002 ouyang-2022-instructgpt-0038
+3,simple,True,BAAI/bge-m3,5,,False,0.0,0.66305983,False,ollama:qwen3:32b,wei-2022-chain-of-thought-0021 wei-2022-chain-of-thought-0052 wei-2022-chain-of-thought-0003 wei-2022-chain-of-thought-0055 wei-2022-chain-of-thought-0002
+4,simple,True,BAAI/bge-m3,5,,False,0.0,0.62275237,False,ollama:qwen3:32b,ouyang-2022-instructgpt-0039 ouyang-2022-instructgpt-0008 ouyang-2022-instructgpt-0002 bai-2022-constitutional-ai-0041 ouyang-2022-instructgpt-0038
+5,simple,True,BAAI/bge-m3,5,3,True,0.3333333333333333,0.6985539,False,ollama:qwen3:32b,bai-2022-constitutional-ai-0008 bai-2022-constitutional-ai-0002 bai-2022-constitutional-ai-0000 bai-2022-constitutional-ai-0001 bai-2022-constitutional-ai-0007
+6,multi-chunk,True,BAAI/bge-m3,5,1,True,1.0,0.6129533,False,ollama:qwen3:32b,brown-2020-gpt3-0071 ouyang-2022-instructgpt-0024 ouyang-2022-instructgpt-0004 ouyang-2022-instructgpt-0006 ouyang-2022-instructgpt-0005
+7,multi-chunk,True,BAAI/bge-m3,5,1,True,1.0,0.6821917,False,ollama:qwen3:32b,rafailov-2023-dpo-0025 ouyang-2022-instructgpt-0006 rafailov-2023-dpo-0003 ouyang-2022-instructgpt-0003 rafailov-2023-dpo-0026
+8,negativo,False,BAAI/bge-m3,5,,,,0.5669106,True,ollama:qwen3:32b,vaswani-2017-attention-is-all-you-need-0000 vaswani-2017-attention-is-all-you-need-0014 vaswani-2017-attention-is-all-you-need-0012 vaswani-2017-attention-is-all-you-need-0013 vaswani-2017-attention-is-all-you-need-0017
+9,negativo,False,BAAI/bge-m3,5,,,,0.5767121,True,ollama:qwen3:32b,brown-2020-gpt3-0096 ouyang-2022-instructgpt-0003 brown-2020-gpt3-0001 ouyang-2022-instructgpt-0013 ouyang-2022-instructgpt-0046
+10,adversarial,True,BAAI/bge-m3,5,1,True,1.0,0.65410686,True,ollama:qwen3:32b,rafailov-2023-dpo-0000 rafailov-2023-dpo-0003 rafailov-2023-dpo-0012 rafailov-2023-dpo-0002 rafailov-2023-dpo-0020
